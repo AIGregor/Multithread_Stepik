@@ -40,7 +40,10 @@ public:
 		return m_pString;
 	}
 	StringPointer(std::string *Pointer) {
-		m_pString = Pointer;
+		if (Pointer == nullptr)
+			m_pString = new std::string();
+		else
+			m_pString = Pointer;
 	}
 	~StringPointer() {
 		if (m_pString->empty())
@@ -50,7 +53,6 @@ public:
 	}
 private:
 	std::string* m_pString;
-
 };
 
 int main()
@@ -58,7 +60,7 @@ int main()
 	std::string s1 = "Hello, world!";
 
 	StringPointer sp1(&s1);
-	StringPointer sp2(NULL);
+	StringPointer sp2(nullptr);
 
 	std::cout << sp1->length() << std::endl;
 	std::cout << *sp1 << std::endl;
